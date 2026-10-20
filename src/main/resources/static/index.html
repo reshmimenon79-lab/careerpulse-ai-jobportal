@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerPulse - Job Portal</title>
+    <!-- External CSS link -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div>
+            <h1>CareerPulse Portal</h1>
+            <p style="color: #6b7280; font-size: 14px;">Spring Boot + REST API + H2 In-Memory Database</p>
+        </div>
+        <div class="badge">Logged In as: Reshmi (Candidate ID: 2)</div>
+    </header>
+
+    <div class="card">
+        <h2>Post a New Job (Recruiter Panel)</h2>
+        <form id="jobForm" class="form-grid" onsubmit="handleCreateJob(event)">
+            <input type="text" id="jobTitle" placeholder="Job Title (e.g. Java Dev)" required>
+            <input type="text" id="company" placeholder="Company Name" required>
+            <input type="text" id="location" placeholder="Location (e.g. Remote)" required>
+            <input type="number" id="salary" placeholder="Salary (Annual)" required>
+            <input type="text" id="description" placeholder="Short Description" style="grid-column: span 2;" required>
+            <button type="submit" style="grid-column: span 2;">Publish Job</button>
+        </form>
+    </div>
+
+    <div class="card">
+        <h2>Available Job Openings</h2>
+        <div id="jobsContainer">Loading jobs from server...</div>
+    </div>
+
+    <div class="card">
+        <h2>Submitted Applications (Audit View)</h2>
+        <div style="margin-bottom: 12px;">
+            <label for="jobFilter" style="font-size: 14px; font-weight: 600;">Filter by Job: </label>
+            <select id="jobFilter" onchange="loadApplications(this.value)">
+                <option value="1">Job #1</option>
+            </select>
+        </div>
+        <!-- AI Resume Matcher Section -->
+        <div class="card" style="border: 2px solid #818cf8; background: #faf5ff;">
+            <h2 style="color: #4f46e5;">🤖 Spring AI Resume Matcher</h2>
+            <p style="font-size: 13px; color: #6b7280; margin-bottom: 12px;">
+                Paste your candidate skills or resume text below to run an automated AI match analysis against a selected job.
+            </p>
+            <div style="display: flex; gap: 12px; margin-bottom: 12px;">
+                <input type="text" id="aiSkillsInput" placeholder="Enter skills (e.g., Java, Spring Boot, PostgreSQL, Git, Microservices)" style="flex: 1;">
+                <button onclick="runAiMatch()" style="background: #4f46e5; min-width: 160px;">Analyze Fit</button>
+            </div>
+            <div id="aiOutput" style="display: none; background: white; padding: 14px; border-radius: 6px; border: 1px solid #e0e7ff; white-space: pre-line; font-size: 14px; color: #374151;"></div>
+        </div>
+        <table>
+            <thead>
+            <tr>
+                <th>App ID</th>
+                <th>Candidate</th>
+                <th>Email</th>
+                <th>Applied Date</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody id="applicationsTableBody">
+            <tr><td colspan="5">Loading applications...</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- External JS link -->
+<script src="/js/app.js"></script>
+</body>
+</html>
